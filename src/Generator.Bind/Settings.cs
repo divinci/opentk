@@ -220,13 +220,8 @@ namespace Bind
 
         public Settings Clone()
         {
-            IFormatter formatter = new BinaryFormatter();
-            using (var stream = new MemoryStream())
-            {
-                formatter.Serialize(stream, this);
-                stream.Seek(0, SeekOrigin.Begin);
-                return (Settings)formatter.Deserialize(stream);
-            }
+            var json = System.Text.Json.JsonSerializer.Serialize(this);
+            return System.Text.Json.JsonSerializer.Deserialize<Settings>(json);
         }
     }
 }

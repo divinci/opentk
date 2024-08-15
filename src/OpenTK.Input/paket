@@ -3,6 +3,6 @@ id OpenTK.Input
 description
     Hid/Controller input library.
 files
-    bin\Release\netstandard2.0\OpenTK.Input.dll ==> lib\netstandard2.0
-    bin\Release\netstandard2.0\OpenTK.Input.xml ==> lib\netstandard2.0
-    bin\Release\netstandard2.0\OpenTK.Input.pdb ==> lib\netstandard2.0
+    bin\Release\net8\OpenTK.Input.dll ==> lib\net8
+    bin\Release\net8\OpenTK.Input.xml ==> lib\net8
+    bin\Release\net8\OpenTK.Input.pdb ==> lib\net8

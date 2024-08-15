@@ -104,8 +104,8 @@ let ciTestProjects =
 // Lazily install DotNet SDK in the correct version if not available
 let install =
     lazy
-        (if (DotNet.getVersion id).StartsWith "6" then id
-         else DotNet.install (fun options -> { options with Version = DotNet.Version "6.0.200" }))
+        (if (DotNet.getVersion id).StartsWith "8" then id
+         else DotNet.install (fun options -> { options with Version = DotNet.Version "8.0.303" }))
 
 // Define general properties across various commands (with arguments)
 let inline withWorkDir wd = DotNet.Options.lift install.Value >> DotNet.Options.withWorkingDirectory wd
@@ -121,7 +121,7 @@ module DotNet =
 
 let pathToSpec = "src" </> "gl.xml"
 
-let specSource = "https://raw.githubusercontent.com/frederikja163/OpenGL-Registry/master/xml/gl.xml"
+let specSource = "https://raw.githubusercontent.com/KhronosGroup/OpenGL-Registry/main/xml/gl.xml"
 
 //let bindingsOutputPath =
 //    ""
@@ -176,7 +176,7 @@ Target.create "Build"( fun _ ->
 Target.create "BuildTest" <| fun _ ->
     !!"tests/**/*.??proj"
     |> Seq.map(fun proj ->
-        DotNet.runWithDefaultOptions "netcoreapp3.1" proj "" |> string)
+        DotNet.runWithDefaultOptions "net8" proj "" |> string)
     |> Trace.logItems "TestBuild-Output: "
 
 // Copies binaries from default VS location to expected bin folder
@@ -185,7 +185,7 @@ Target.create "CopyBinaries" (fun _ ->
     releaseProjects
     |> Seq.map
         (fun f ->
-        ((System.IO.Path.GetDirectoryName f) @@ "bin/Release/netstandard2.0",
+        ((System.IO.Path.GetDirectoryName f) @@ "bin/Release/net8",
          "bin" @@ (System.IO.Path.GetFileNameWithoutExtension f)))
     |> Seq.iter (fun (fromDir, toDir) -> Shell.copyDir toDir fromDir (fun _ -> true)))
 
