@@ -121,7 +121,7 @@ module DotNet =
 
 let pathToSpec = "src" </> "gl.xml"
 
-let specSource = "https://raw.githubusercontent.com/frederikja163/OpenGL-Registry/master/xml/gl.xml"
+let specSource = "https://raw.githubusercontent.com/KhronosGroup/OpenGL-Registry/main/xml/gl.xml"
 
 //let bindingsOutputPath =
 //    ""
