@@ -1,22 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.1;netcoreapp3.1</TargetFrameworks>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>latest</LangVersion>
+    <TargetFramework>net9.0</TargetFramework>
     <Deterministic>true</Deterministic>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <RootNamespace>OpenTK.Mathematics</RootNamespace>
   </PropertyGroup>
-
-  <PropertyGroup>
-    <Description>Mathematical structures and algorithms, provided and used by OpenTK.</Description>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>../../OpenTK.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
-  </ItemGroup>
-  
-  <Import Project="..\..\props\common.props" />
-  <Import Project="..\..\props\nuget-common.props" />
-  <Import Project="..\..\props\stylecop.props" />
 </Project>

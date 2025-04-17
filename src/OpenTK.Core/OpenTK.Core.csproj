@@ -1,17 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.1</TargetFrameworks>
+    <TargetFramework>net9.0</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <RootNamespace>OpenTK.Core</RootNamespace>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup>
     <Description>Core shared functionality for the OpenTK library.</Description>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>../../OpenTK.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
-
-  <Import Project="..\..\props\common.props" />
-  <Import Project="..\..\props\nuget-common.props" />
-  <Import Project="..\..\props\stylecop.props" />
 </Project>
