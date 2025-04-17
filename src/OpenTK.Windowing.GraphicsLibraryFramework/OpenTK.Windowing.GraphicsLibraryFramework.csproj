@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
     <PropertyGroup>
       <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
       <RootNamespace>OpenTK.Windowing.GraphicsLibraryFramework</RootNamespace>
       <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-      <LangVersion>8.0</LangVersion>
+      <SignAssembly>true</SignAssembly>
+      <AssemblyOriginatorKeyFile>../../OpenTK.snk</AssemblyOriginatorKeyFile>
     </PropertyGroup>
     
     <ItemGroup>

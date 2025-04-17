@@ -79,34 +79,34 @@ namespace OpenTK.Mathematics
         {
             readonly get
             {
-                if (index == 0)
+                if (((uint)index) < 2)
                 {
-                    return X;
+                    return GetElementUnsafe(in this, index);
                 }
-
-                if (index == 1)
+                else
                 {
-                    return Y;
+                    throw new IndexOutOfRangeException("You tried to access this vector at index: " + index);
                 }
-
-                throw new IndexOutOfRangeException("You tried to access this vector at index: " + index);
             }
 
             set
             {
-                if (index == 0)
+                if (((uint)index) < 2)
                 {
-                    X = value;
-                }
-                else if (index == 1)
-                {
-                    Y = value;
+                    GetElementUnsafe(in this, index) = value;
                 }
                 else
                 {
                     throw new IndexOutOfRangeException("You tried to set this vector at index: " + index);
                 }
             }
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private readonly ref float GetElementUnsafe(in Vector2 v, int index)
+        {
+            ref float address = ref Unsafe.AsRef(in v.X);
+            return ref Unsafe.Add(ref address, index);
         }
 
         /// <summary>
@@ -194,6 +194,57 @@ namespace OpenTK.Mathematics
             result.X = MathF.Abs(result.X);
             result.Y = MathF.Abs(result.Y);
             return result;
+        }
+
+        /// <summary>
+        /// Returns a new vector were component-wise rounding has been applied.
+        /// Equivalent to calling <see cref="MathF.Round(float)"/> on each component.
+        /// </summary>
+        /// <returns>The rounded vector.</returns>
+        public readonly Vector2 Round()
+        {
+            return Round(this);
+        }
+
+        /// <summary>
+        /// Returns a new vector were component-wise rounding has been applied with the specified midpoint rounding rule.
+        /// Equivalent to calling <see cref="MathF.Round(float,MidpointRounding)"/> on each component.
+        /// </summary>
+        /// <param name="rounding">The midpoint rounding rule to use.</param>
+        /// <returns>The rounded vector.</returns>
+        public readonly Vector2 Round(MidpointRounding rounding)
+        {
+            return Round(this, rounding);
+        }
+
+        /// <summary>
+        /// Returns a new vector were a component-wise ceiling operation has been applied.
+        /// Equivalent to calling <see cref="MathF.Ceiling(float)"/> on each component.
+        /// </summary>
+        /// <returns>The ceiled vector.</returns>
+        public readonly Vector2 Ceiling()
+        {
+            return Ceiling(this);
+        }
+
+        /// <summary>
+        /// Returns a new vector were a component-wise floor operation has been applied.
+        /// Equivalent to calling <see cref="MathF.Floor(float)"/> on each component.
+        /// </summary>
+        /// <returns>The floored vector.</returns>
+        public readonly Vector2 Floor()
+        {
+            return Floor(this);
+        }
+
+        /// <summary>
+        /// Returns a new vector were component-wise truncation has been applied.
+        /// Equivalent to calling <see cref="MathF.Truncate(float)"/> on each component.
+        /// </summary>
+        /// <returns>The truncated vector.</returns>
+        public readonly Vector2 Truncate()
+        {
+            return Truncate(this);
         }
 
         /// <summary>
@@ -532,6 +583,136 @@ namespace OpenTK.Mathematics
         {
             result.X = MathF.Abs(vec.X);
             result.Y = MathF.Abs(vec.Y);
+        }
+
+        /// <summary>
+        /// Component-wise rounding. Equivalent to calling <see cref="MathF.Round(float)"/> on each component.
+        /// </summary>
+        /// <param name="vec">The vector to round.</param>
+        /// <returns>The component-wise rounded vector.</returns>
+        [Pure]
+        public static Vector2 Round(Vector2 vec)
+        {
+            vec.X = MathF.Round(vec.X);
+            vec.Y = MathF.Round(vec.Y);
+            return vec;
+        }
+
+        /// <summary>
+        /// Component-wise rounding. Equivalent to calling <see cref="MathF.Round(float)"/> on each component.
+        /// </summary>
+        /// <param name="vec">The vector to round.</param>
+        /// <param name="result">The component-wise rounded vector.</param>
+        public static void Round(in Vector2 vec, out Vector2 result)
+        {
+            result.X = MathF.Round(vec.X);
+            result.Y = MathF.Round(vec.Y);
+        }
+
+        /// <summary>
+        /// Component-wise rounding with specified midpoint rounding rule.
+        /// Equivalent to calling <see cref="MathF.Round(float,MidpointRounding)"/> on each component.
+        /// </summary>
+        /// <param name="vec">The vector to round.</param>
+        /// <param name="rounding">The midpoint rounding rule to use.</param>
+        /// <returns>The component-wise rounded vector.</returns>
+        [Pure]
+        public static Vector2 Round(Vector2 vec, MidpointRounding rounding)
+        {
+            vec.X = MathF.Round(vec.X, rounding);
+            vec.Y = MathF.Round(vec.Y, rounding);
+            return vec;
+        }
+
+        /// <summary>
+        /// Component-wise rounding with specified midpoint rounding rule.
+        /// Equivalent to calling <see cref="MathF.Round(float,MidpointRounding)"/> on each component.
+        /// </summary>
+        /// <param name="vec">The vector to round.</param>
+        /// <param name="rounding">The midpoint rounding rule to use.</param>
+        /// <param name="result">The component-wise rounded vector.</param>
+        public static void Round(in Vector2 vec, MidpointRounding rounding, out Vector2 result)
+        {
+            result.X = MathF.Round(vec.X, rounding);
+            result.Y = MathF.Round(vec.Y, rounding);
+        }
+
+        /// <summary>
+        /// Component-wise ceiling operation.
+        /// Equivalent to calling <see cref="MathF.Ceiling(float)"/> on each component.
+        /// </summary>
+        /// <param name="vec">The vector to take the ceiling of.</param>
+        /// <returns>The component-wise ceiling vector.</returns>
+        [Pure]
+        public static Vector2 Ceiling(Vector2 vec)
+        {
+            vec.X = MathF.Ceiling(vec.X);
+            vec.Y = MathF.Ceiling(vec.Y);
+            return vec;
+        }
+
+        /// <summary>
+        /// Component-wise ceiling operation.
+        /// Equivalent to calling <see cref="MathF.Ceiling(float)"/> on each component.
+        /// </summary>
+        /// <param name="vec">The vector to take the ceiling of.</param>
+        /// <param name="result">The component-wise ceiling vector.</param>
+        public static void Ceiling(in Vector2 vec, out Vector2 result)
+        {
+            result.X = MathF.Ceiling(vec.X);
+            result.Y = MathF.Ceiling(vec.Y);
+        }
+
+        /// <summary>
+        /// Component-wise floor operation.
+        /// Equivalent to calling <see cref="MathF.Floor(float)"/> on each component.
+        /// </summary>
+        /// <param name="vec">The vector to take the floor of.</param>
+        /// <returns>The component-wise floored vector.</returns>
+        [Pure]
+        public static Vector2 Floor(Vector2 vec)
+        {
+            vec.X = MathF.Floor(vec.X);
+            vec.Y = MathF.Floor(vec.Y);
+            return vec;
+        }
+
+        /// <summary>
+        /// Component-wise floor operation.
+        /// Equivalent to calling <see cref="MathF.Floor(float)"/> on each component.
+        /// </summary>
+        /// <param name="vec">The vector to take the floor of.</param>
+        /// <param name="result">The component-wise floored vector.</param>
+        public static void Floor(in Vector2 vec, out Vector2 result)
+        {
+            result.X = MathF.Floor(vec.X);
+            result.Y = MathF.Floor(vec.Y);
+        }
+
+        /// <summary>
+        /// Component-wise truncation.
+        /// Equivalent to calling <see cref="MathF.Truncate(float)"/> on each component.
+        /// </summary>
+        /// <param name="vec">The vector to truncate.</param>
+        /// <returns>The component-wise truncated vector.</returns>
+        [Pure]
+        public static Vector2 Truncate(Vector2 vec)
+        {
+            vec.X = MathF.Truncate(vec.X);
+            vec.Y = MathF.Truncate(vec.Y);
+            return vec;
+        }
+
+        /// <summary>
+        /// Component-wise truncation.
+        /// Equivalent to calling <see cref="MathF.Truncate(float)"/> on each component.
+        /// </summary>
+        /// <param name="vec">The vector to truncate.</param>
+        /// <param name="result">The component-wise truncated vector.</param>
+        public static void Truncate(in Vector2 vec, out Vector2 result)
+        {
+            result.X = MathF.Truncate(vec.X);
+            result.Y = MathF.Truncate(vec.Y);
         }
 
         /// <summary>
@@ -1213,6 +1394,26 @@ namespace OpenTK.Mathematics
         public static explicit operator System.Drawing.SizeF(Vector2 vec)
         {
             return new System.Drawing.SizeF(vec.X, vec.Y);
+        }
+
+        /// <summary>
+        /// Converts <see cref="System.Numerics.Vector2"/> to <see cref="Vector2"/>.
+        /// </summary>
+        /// <param name="vec">The <see cref="System.Numerics.Vector2"/> to cast.</param>
+        [Pure]
+        public static explicit operator Vector2(System.Numerics.Vector2 vec)
+        {
+            return Unsafe.As<System.Numerics.Vector2, Vector2>(ref vec);
+        }
+
+        /// <summary>
+        /// Converts <see cref="Vector2"/> to <see cref="System.Numerics.Vector2"/>.
+        /// </summary>
+        /// <param name="vec">The <see cref="Vector2"/> to cast.</param>
+        [Pure]
+        public static explicit operator System.Numerics.Vector2(Vector2 vec)
+        {
+            return Unsafe.As<Vector2, System.Numerics.Vector2>(ref vec);
         }
 
         /// <inheritdoc/>
