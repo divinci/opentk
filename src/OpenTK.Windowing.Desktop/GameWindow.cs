@@ -46,7 +46,7 @@ namespace OpenTK.Windowing.Desktop
     /// </item>
     /// </list>
     /// </remarks>
-    public class GameWindow : NativeWindow
+    public partial class GameWindow : NativeWindow
     {
         /// <summary>
         /// Occurs before the window is displayed for the first time.
@@ -82,14 +82,14 @@ namespace OpenTK.Windowing.Desktop
         /// </summary>
         private const double MaxFrequency = 500.0;
 
-        private readonly Stopwatch _watchUpdate = new Stopwatch();
+        public readonly Stopwatch _watchUpdate = new Stopwatch();
 
         /// <summary>
         /// Gets a value indicating whether or not UpdatePeriod has consistently failed to reach TargetUpdatePeriod.
         /// This can be used to do things such as decreasing visual quality if the user's computer isn't powerful enough
         /// to handle the application.
         /// </summary>
-        protected bool IsRunningSlowly { get; private set; }
+        protected bool IsRunningSlowly { get; set; }
 
         private double _updateFrequency;
 
@@ -178,9 +178,9 @@ namespace OpenTK.Windowing.Desktop
         /// </summary>
         public int ExpectedSchedulerPeriod { get; set; } = 16;
 
-        private readonly bool _win32SuspendTimerOnDrag;
+        public readonly bool _win32SuspendTimerOnDrag;
 
-        private Win32WindowProc _win32WndProc = null;
+        public Win32WindowProc _win32WndProc = null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GameWindow"/> class with sensible default attributes.
@@ -202,21 +202,21 @@ namespace OpenTK.Windowing.Desktop
         #region Win32 Function for timing
 
         [DllImport("kernel32", SetLastError = true)]
-        private static extern IntPtr SetThreadAffinityMask(IntPtr hThread, IntPtr dwThreadAffinityMask);
+        public static extern IntPtr SetThreadAffinityMask(IntPtr hThread, IntPtr dwThreadAffinityMask);
 
         [DllImport("kernel32")]
-        private static extern IntPtr GetCurrentThread();
+        public static extern IntPtr GetCurrentThread();
 
         [DllImport("winmm")]
-        private static extern uint timeBeginPeriod(uint uPeriod);
+        public static extern uint timeBeginPeriod(uint uPeriod);
 
         [DllImport("winmm")]
-        private static extern uint timeEndPeriod(uint uPeriod);
+        public static extern uint timeEndPeriod(uint uPeriod);
 
         #endregion
 
         /// <summary>Counter for how many updates in Run() where slow.</summary>
-        private int _slowUpdates = 0;
+        public int _slowUpdates = 0;
 
         /// <summary>
         /// Initialize the update thread (if using a multi-threaded context, and enter the game loop of the GameWindow).
@@ -434,13 +434,13 @@ namespace OpenTK.Windowing.Desktop
         }
 
         // Only fired when GameWindowSettings.Win32SuspendTimerOnDrag is enabled
-        private void Win32_OnModalSizeMoveBegin()
+        public void Win32_OnModalSizeMoveBegin()
         {
             _watchUpdate.Stop();
         }
 
         // Only fired when GameWindowSettings.Win32SuspendTimerOnDrag is enabled
-        private void Win32_OnModalSizeMoveEnd()
+        public void Win32_OnModalSizeMoveEnd()
         {
             _watchUpdate.Restart();
         }

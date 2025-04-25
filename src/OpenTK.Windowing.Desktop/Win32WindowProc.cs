@@ -7,7 +7,7 @@ namespace OpenTK.Windowing.Desktop
     /// <summary>
     /// Windows-specific Win32 message-handling.
     /// </summary>
-    internal unsafe class Win32WindowProc : IDisposable
+    public unsafe class Win32WindowProc : IDisposable
     {
         [DllImport("user32.dll")]
         private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
