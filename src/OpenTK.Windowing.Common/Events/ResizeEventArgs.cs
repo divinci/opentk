@@ -14,16 +14,12 @@ namespace OpenTK.Windowing.Common
     /// <summary>
     /// Defines the event data for the window resize event.
     /// </summary>
-    public readonly struct ResizeEventArgs
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="ResizeEventArgs"/> struct.
+    /// </remarks>
+    /// <param name="size">The new window size.</param>
+    public readonly struct ResizeEventArgs(Vector2i size)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ResizeEventArgs"/> struct.
-        /// </summary>
-        /// <param name="size">The new window size.</param>
-        public ResizeEventArgs(Vector2i size)
-        {
-            Size = size;
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ResizeEventArgs"/> struct.
@@ -38,7 +34,7 @@ namespace OpenTK.Windowing.Common
         /// <summary>
         /// Gets the new window size.
         /// </summary>
-        public Vector2i Size { get; }
+        public Vector2i Size { get; } = size;
 
         /// <summary>
         /// Gets the new window width.

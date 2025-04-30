@@ -13,12 +13,16 @@ namespace OpenTK.Windowing.Common
     /// <summary>
     /// Defines the event data for the framebuffer resize event.
     /// </summary>
-    public readonly struct FramebufferResizeEventArgs
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="FramebufferResizeEventArgs"/> struct.
+    /// </remarks>
+    /// <param name="size">the new framebuffer size.</param>
+    public readonly struct FramebufferResizeEventArgs(Vector2i size)
     {
         /// <summary>
         /// Gets the new framebuffer size.
         /// </summary>
-        public Vector2i Size { get; }
+        public Vector2i Size { get; } = size;
 
         /// <summary>
         /// Gets the new framebuffer width.
@@ -29,15 +33,6 @@ namespace OpenTK.Windowing.Common
         /// Gets the new framebuffer height.
         /// </summary>
         public int Height => Size.Y;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FramebufferResizeEventArgs"/> struct.
-        /// </summary>
-        /// <param name="size">the new framebuffer size.</param>
-        public FramebufferResizeEventArgs(Vector2i size)
-        {
-            Size = size;
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FramebufferResizeEventArgs"/> struct.

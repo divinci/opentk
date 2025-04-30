@@ -14,16 +14,12 @@ namespace OpenTK.Windowing.Common
     /// <summary>
     /// Defines the event data for <see cref="NativeWindow.MouseWheel" /> events.
     /// </summary>
-    public readonly struct MouseWheelEventArgs
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="MouseWheelEventArgs"/> struct.
+    /// </remarks>
+    /// <param name="offset">The offset the mouse wheel was moved.</param>
+    public readonly struct MouseWheelEventArgs(Vector2 offset)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MouseWheelEventArgs"/> struct.
-        /// </summary>
-        /// <param name="offset">The offset the mouse wheel was moved.</param>
-        public MouseWheelEventArgs(Vector2 offset)
-        {
-            Offset = offset;
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MouseWheelEventArgs"/> struct.
@@ -38,7 +34,7 @@ namespace OpenTK.Windowing.Common
         /// <summary>
         /// Gets the offset the mouse wheel was moved.
         /// </summary>
-        public Vector2 Offset { get; }
+        public Vector2 Offset { get; } = offset;
 
         /// <summary>
         /// Gets the offset on the X axis.

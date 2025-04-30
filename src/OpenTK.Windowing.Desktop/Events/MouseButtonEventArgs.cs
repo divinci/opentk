@@ -15,35 +15,29 @@ namespace OpenTK.Windowing.Common
     /// Defines the event data for <see cref="NativeWindow.MouseDown" />
     /// and <see cref="NativeWindow.MouseUp" /> events.
     /// </summary>
-    public readonly struct MouseButtonEventArgs
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="MouseButtonEventArgs"/> struct.
+    /// </remarks>
+    /// <param name="button">The mouse button for the event.</param>
+    /// <param name="action">The action of the mouse button.</param>
+    /// <param name="modifiers">The key modifiers held during the mouse button's action.</param>
+    public readonly struct MouseButtonEventArgs(MouseButton button, InputAction action, KeyModifiers modifiers)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MouseButtonEventArgs"/> struct.
-        /// </summary>
-        /// <param name="button">The mouse button for the event.</param>
-        /// <param name="action">The action of the mouse button.</param>
-        /// <param name="modifiers">The key modifiers held during the mouse button's action.</param>
-        public MouseButtonEventArgs(MouseButton button, InputAction action, KeyModifiers modifiers)
-        {
-            Button = button;
-            Action = action;
-            Modifiers = modifiers;
-        }
 
         /// <summary>
         /// Gets the <see cref="MouseButton" /> that triggered this event.
         /// </summary>
-        public MouseButton Button { get; }
+        public MouseButton Button { get; } = button;
 
         /// <summary>
         /// Gets the <see cref="InputAction"/> of the pressed button.
         /// </summary>
-        public InputAction Action { get; }
+        public InputAction Action { get; } = action;
 
         /// <summary>
         /// Gets the active <see cref="KeyModifiers"/> of the pressed button.
         /// </summary>
-        public KeyModifiers Modifiers { get; }
+        public KeyModifiers Modifiers { get; } = modifiers;
 
         /// <summary>
         /// Gets a value indicating whether the <see cref="Button"/> which triggered this event was pressed or released.

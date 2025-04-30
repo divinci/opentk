@@ -104,7 +104,7 @@ namespace OpenTK.Windowing.Desktop
         /// </remarks>
         public float VerticalRawDpi { get; private set; }
 
-        private VideoMode[] _supportedVideoModes;
+        private readonly VideoMode[] _supportedVideoModes;
 
         /// <summary>
         /// A list of supported video modes for this monitor.

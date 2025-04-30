@@ -15,16 +15,12 @@ namespace OpenTK.Windowing.Common
     /// <summary>
     /// Defines the event data for the window position event.
     /// </summary>
-    public readonly struct WindowPositionEventArgs
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="WindowPositionEventArgs"/> struct.
+    /// </remarks>
+    /// <param name="position">The new window position.</param>
+    public readonly struct WindowPositionEventArgs(Vector2i position)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="WindowPositionEventArgs"/> struct.
-        /// </summary>
-        /// <param name="position">The new window position.</param>
-        public WindowPositionEventArgs(Vector2i position)
-        {
-            Position = position;
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowPositionEventArgs"/> struct with given coordinate.
@@ -39,7 +35,7 @@ namespace OpenTK.Windowing.Common
         /// <summary>
         /// Gets the new window position, in pixels relative to the top left corner of the current monitor.
         /// </summary>
-        public Vector2i Position { get; }
+        public Vector2i Position { get; } = position;
 
         /// <summary>
         /// Gets the new window x position.

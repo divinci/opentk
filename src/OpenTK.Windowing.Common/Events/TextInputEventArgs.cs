@@ -12,21 +12,17 @@ namespace OpenTK.Windowing.Common
     /// <summary>
     ///     Raised when a single unicode code point is input.
     /// </summary>
-    public readonly struct TextInputEventArgs
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="TextInputEventArgs"/> struct.
+    /// </remarks>
+    /// <param name="unicode">The unicode code point that was input.</param>
+    public readonly struct TextInputEventArgs(int unicode)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TextInputEventArgs"/> struct.
-        /// </summary>
-        /// <param name="unicode">The unicode code point that was input.</param>
-        public TextInputEventArgs(int unicode)
-        {
-            Unicode = unicode;
-        }
 
         /// <summary>
         ///     Gets the Unicode code point that was input.
         /// </summary>
-        public int Unicode { get; }
+        public int Unicode { get; } = unicode;
 
         /// <summary>
         ///     Gets the string representation of the input Unicode code point.

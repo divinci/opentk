@@ -15,37 +15,30 @@ namespace OpenTK.Windowing.Common
     /// <summary>
     /// Defines the event data for <see cref="NativeWindow.KeyDown"/> and <see cref="NativeWindow.KeyUp"/> events.
     /// </summary>
-    public readonly struct KeyboardKeyEventArgs
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="KeyboardKeyEventArgs"/> struct.
+    /// </remarks>
+    /// <param name="key">The key that generated this event.</param>
+    /// <param name="scanCode">The scan code of the key that generated this event.</param>
+    /// <param name="modifiers">The key modifiers that were active when this event was generated.</param>
+    /// <param name="isRepeat">Whether this event is a repeat from the user holding the key down.</param>
+    public readonly struct KeyboardKeyEventArgs(Keys key, int scanCode, KeyModifiers modifiers, bool isRepeat)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="KeyboardKeyEventArgs"/> struct.
-        /// </summary>
-        /// <param name="key">The key that generated this event.</param>
-        /// <param name="scanCode">The scan code of the key that generated this event.</param>
-        /// <param name="modifiers">The key modifiers that were active when this event was generated.</param>
-        /// <param name="isRepeat">Whether this event is a repeat from the user holding the key down.</param>
-        public KeyboardKeyEventArgs(Keys key, int scanCode, KeyModifiers modifiers, bool isRepeat)
-        {
-            Key = key;
-            ScanCode = scanCode;
-            Modifiers = modifiers;
-            IsRepeat = isRepeat;
-        }
 
         /// <summary>
         /// Gets the key that generated this event.
         /// </summary>
-        public Keys Key { get; }
+        public Keys Key { get; } = key;
 
         /// <summary>
         /// Gets the keyboard scan code of the key that generated this event.
         /// </summary>
-        public int ScanCode { get; }
+        public int ScanCode { get; } = scanCode;
 
         /// <summary>
         /// Gets a bitwise combination representing the key modifiers were active when this event was generated.
         /// </summary>
-        public KeyModifiers Modifiers { get; }
+        public KeyModifiers Modifiers { get; } = modifiers;
 
         /// <summary>
         /// Gets a value indicating whether
@@ -56,7 +49,7 @@ namespace OpenTK.Windowing.Common
         /// a key; false, if this was caused by the user pressing a
         /// key for the first time.
         /// </value>
-        public bool IsRepeat { get; }
+        public bool IsRepeat { get; } = isRepeat;
 
         /// <summary>
         /// Gets a value indicating whether <see cref="OpenTK.Windowing.Common.Input.KeyModifiers.Alt" /> is pressed.

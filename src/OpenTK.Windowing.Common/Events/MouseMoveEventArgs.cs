@@ -14,18 +14,13 @@ namespace OpenTK.Windowing.Common
     /// <summary>
     /// Defines the event data for <see cref="NativeWindow.MouseMove"/> events.
     /// </summary>
-    public readonly struct MouseMoveEventArgs
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="MouseMoveEventArgs"/> struct.
+    /// </remarks>
+    /// <param name="position">The new mouse position.</param>
+    /// <param name="delta">The change in position produced by this event.</param>
+    public readonly struct MouseMoveEventArgs(Vector2 position, Vector2 delta)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MouseMoveEventArgs"/> struct.
-        /// </summary>
-        /// <param name="position">The new mouse position.</param>
-        /// <param name="delta">The change in position produced by this event.</param>
-        public MouseMoveEventArgs(Vector2 position, Vector2 delta)
-        {
-            Position = position;
-            Delta = delta;
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MouseMoveEventArgs"/> struct.
@@ -55,7 +50,7 @@ namespace OpenTK.Windowing.Common
         /// Gets the new position produced by this event.
         /// This position is relative to the top-left corner of the contents of the window.
         /// </summary>
-        public Vector2 Position { get; }
+        public Vector2 Position { get; } = position;
 
         /// <summary>
         /// Gets the change in X position since the last event.
@@ -70,6 +65,6 @@ namespace OpenTK.Windowing.Common
         /// <summary>
         /// Gets the change in position since the last event.
         /// </summary>
-        public Vector2 Delta { get; }
+        public Vector2 Delta { get; } = delta;
     }
 }

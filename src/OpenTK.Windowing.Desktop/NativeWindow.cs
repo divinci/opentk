@@ -1530,7 +1530,7 @@ namespace OpenTK.Windowing.Desktop
         }
 
         // This list must only ever be accessed from the main thread, inside RethrowCallbackExceptionsIfNeeded().
-        private static readonly List<ExceptionDispatchInfo> _localThreadExceptions = new List<ExceptionDispatchInfo>();
+        private static readonly List<ExceptionDispatchInfo> _localThreadExceptions = [];
 
         private static void RethrowCallbackExceptionsIfNeeded()
         {

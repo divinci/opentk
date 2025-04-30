@@ -12,22 +12,18 @@ namespace OpenTK.Windowing.Common
     /// <summary>
     /// Defines the event data for the window minimizing event.
     /// </summary>
-    public readonly struct MinimizedEventArgs
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="MinimizedEventArgs"/> struct.
+    /// </remarks>
+    /// <param name="isMinimized">
+    /// A value indicating whether the window is minimized.
+    /// </param>
+    public readonly struct MinimizedEventArgs(bool isMinimized)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MinimizedEventArgs"/> struct.
-        /// </summary>
-        /// <param name="isMinimized">
-        /// A value indicating whether the window is minimized.
-        /// </param>
-        public MinimizedEventArgs(bool isMinimized)
-        {
-            IsMinimized = isMinimized;
-        }
 
         /// <summary>
         /// Gets a value indicating whether the window is minimized.
         /// </summary>
-        public bool IsMinimized { get; }
+        public bool IsMinimized { get; } = isMinimized;
     }
 }

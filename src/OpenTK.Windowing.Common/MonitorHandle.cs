@@ -14,21 +14,16 @@ namespace OpenTK.Windowing.Common
     /// <summary>
     /// Wrapper around an implementation-defined monitor struct.
     /// </summary>
-    public struct MonitorHandle
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="MonitorHandle"/> struct.
+    /// </remarks>
+    /// <param name="ptr">A pointer to the underlying native Monitor.</param>
+    public struct MonitorHandle(IntPtr ptr)
     {
         /// <summary>
         /// Gets a pointer to the underlying native Monitor.
         /// </summary>
-        public IntPtr Pointer { get; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MonitorHandle"/> struct.
-        /// </summary>
-        /// <param name="ptr">A pointer to the underlying native Monitor.</param>
-        public MonitorHandle(IntPtr ptr)
-        {
-            Pointer = ptr;
-        }
+        public IntPtr Pointer { get; } = ptr;
 
         /// <summary>
         /// Converts the underlying <see cref="Pointer"/> to a unmanaged pointer.
